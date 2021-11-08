@@ -4,18 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.EventListener;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
 public class RelojBean extends JLabel implements Serializable, ActionListener {
     public static final boolean FORMATO_24 = false;
     public static final boolean FORMATO_12 = true;
+    private AlarmaListener alarmaListener;
     
     private boolean formato;
     private boolean hayAlarma;
     private int hora;
     private int minuto;
     private String mensaje;
+    private Alarma alarma;
 
     public boolean isFormato() {
         return formato;
@@ -23,6 +26,7 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
 
     public void setFormato(boolean formato) {
         this.formato = formato;
+        pintar();
     }
 
     public boolean isHayAlarma() {
@@ -56,8 +60,25 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
+    public Alarma getAlarma() {
+        return alarma;
+    }
+
+    public void setAlarma(Alarma alarma) {
+        this.alarma = alarma;
+        if(alarma == null){
+            hayAlarma = false;
+        }
+        else{
+            hayAlarma = true;
+        }
+    }
+    
+    
     
     private Timer horaFinder;
+    private boolean sonoAlarma = false;
 
     public RelojBean() {
         formato = FORMATO_24;
@@ -69,7 +90,17 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
     public void actionPerformed(ActionEvent e){
         hora = LocalTime.now().getHour();
         minuto = LocalTime.now().getMinute();
-        setText(getStringHora());
+        pintar();
+        
+        if(hayAlarma && alarma.getHora()==hora && alarma.getMinuto()==minuto){
+            if(!sonoAlarma ){
+            alarmaListener.capturarAlarma(new AlarmaEvent(this));
+            sonoAlarma = true;
+            }
+        }
+        else{
+            sonoAlarma = false;
+        }
     }
     
     private String getStringHora(){
@@ -78,4 +109,19 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
         return tHora+":"+minuto;
     }
     
+    public interface AlarmaListener extends EventListener{
+        public void capturarAlarma(AlarmaEvent ev);
+    }
+    
+    public void addAlarmaListener(AlarmaListener alarmaListener){
+        this.alarmaListener = alarmaListener;
+    }
+
+    public void removeAlarmaListener(AlarmaListener alarmaListener){
+        this.alarmaListener=null;
+    }
+    
+    public void pintar(){
+        setText(getStringHora());
+    }
 }

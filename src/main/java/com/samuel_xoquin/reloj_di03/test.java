@@ -16,6 +16,7 @@ public class test extends javax.swing.JFrame {
      */
     public test() {
         initComponents();
+        relojBean2.setAlarma(new Alarma(20,53));
     }
 
     /**
@@ -27,29 +28,39 @@ public class test extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        relojBean1 = new com.samuel_xoquin.reloj_di03.RelojBean();
+        relojBean2 = new com.samuel_xoquin.reloj_di03.RelojBean();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        relojBean2.addAlarmaListener(new com.samuel_xoquin.reloj_di03.RelojBean.AlarmaListener() {
+            public void capturarAlarma(com.samuel_xoquin.reloj_di03.AlarmaEvent evt) {
+                relojBean2CapturarAlarma(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(relojBean1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addComponent(relojBean2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(relojBean1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addGap(111, 111, 111)
+                .addComponent(relojBean2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void relojBean2CapturarAlarma(com.samuel_xoquin.reloj_di03.AlarmaEvent evt) {//GEN-FIRST:event_relojBean2CapturarAlarma
+        System.out.println("get alarmado");
+    }//GEN-LAST:event_relojBean2CapturarAlarma
 
     /**
      * @param args the command line arguments
@@ -87,6 +98,6 @@ public class test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.samuel_xoquin.reloj_di03.RelojBean relojBean1;
+    private com.samuel_xoquin.reloj_di03.RelojBean relojBean2;
     // End of variables declaration//GEN-END:variables
 }
