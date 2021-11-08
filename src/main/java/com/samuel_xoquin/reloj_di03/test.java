@@ -5,6 +5,9 @@
  */
 package com.samuel_xoquin.reloj_di03;
 
+import java.awt.Font;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xoquin
@@ -16,7 +19,7 @@ public class test extends javax.swing.JFrame {
      */
     public test() {
         initComponents();
-        relojBean2.setAlarma(new Alarma(20,53));
+        reloj.setFont(new Font("DejaVu Sans", Font.PLAIN, 40));
     }
 
     /**
@@ -28,13 +31,48 @@ public class test extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        relojBean2 = new com.samuel_xoquin.reloj_di03.RelojBean();
+        reloj = new com.samuel_xoquin.reloj_di03.RelojBean();
+        jLabel1 = new javax.swing.JLabel();
+        nomAlarma = new javax.swing.JTextField();
+        spnHora = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        spnMinuto = new javax.swing.JSpinner();
+        btnEstablecer = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Alarma");
 
-        relojBean2.addAlarmaListener(new com.samuel_xoquin.reloj_di03.RelojBean.AlarmaListener() {
+        reloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        reloj.setTextoAlarma("¡Sonó la alarma!");
+        reloj.addAlarmaListener(new com.samuel_xoquin.reloj_di03.RelojBean.AlarmaListener() {
             public void capturarAlarma(com.samuel_xoquin.reloj_di03.AlarmaEvent evt) {
-                relojBean2CapturarAlarma(evt);
+                relojCapturarAlarma(evt);
+            }
+        });
+
+        jLabel1.setText("Nombre alarma");
+
+        spnHora.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
+        jLabel2.setText("Hora");
+
+        jLabel3.setText("Minuto");
+
+        spnMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        btnEstablecer.setText("Establecer");
+        btnEstablecer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstablecerActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -43,24 +81,70 @@ public class test extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(relojBean2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(reloj, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomAlarma))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEstablecer)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 29, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(relojBean2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(nomAlarma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(spnHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(spnMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnEstablecer)))
+                    .addComponent(reloj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void relojBean2CapturarAlarma(com.samuel_xoquin.reloj_di03.AlarmaEvent evt) {//GEN-FIRST:event_relojBean2CapturarAlarma
-        System.out.println("get alarmado");
-    }//GEN-LAST:event_relojBean2CapturarAlarma
+    private void btnEstablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstablecerActionPerformed
+        int hora = (int) spnHora.getValue();
+        int minuto = (int) spnMinuto.getValue();
+        reloj.setAlarma(new Alarma(hora, minuto));
+        reloj.setTextoAlarma(nomAlarma.getText());
+    }//GEN-LAST:event_btnEstablecerActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        reloj.setAlarma(null);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void relojCapturarAlarma(com.samuel_xoquin.reloj_di03.AlarmaEvent evt) {//GEN-FIRST:event_relojCapturarAlarma
+        JOptionPane.showMessageDialog(null, reloj.getTextoAlarma(), "Alerta alarma", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_relojCapturarAlarma
 
     /**
      * @param args the command line arguments
@@ -98,6 +182,14 @@ public class test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.samuel_xoquin.reloj_di03.RelojBean relojBean2;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEstablecer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField nomAlarma;
+    private com.samuel_xoquin.reloj_di03.RelojBean reloj;
+    private javax.swing.JSpinner spnHora;
+    private javax.swing.JSpinner spnMinuto;
     // End of variables declaration//GEN-END:variables
 }

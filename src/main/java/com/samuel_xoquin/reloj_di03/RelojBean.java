@@ -19,7 +19,9 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
     private int minuto;
     private String mensaje;
     private Alarma alarma;
+    private String textoAlarma;
 
+    // <editor-fold defaultstate="collapsed" desc="Getters y setters">    
     public boolean isFormato() {
         return formato;
     }
@@ -75,6 +77,15 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
         }
     }
     
+    public String getTextoAlarma() {
+        return textoAlarma;
+    }
+
+    public void setTextoAlarma(String textoAlarma) {
+        this.textoAlarma = textoAlarma;
+    }
+    
+    // </editor-fold>   
     
     
     private Timer horaFinder;
