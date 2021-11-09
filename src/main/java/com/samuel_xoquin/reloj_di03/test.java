@@ -38,8 +38,7 @@ public class test extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         spnMinuto = new javax.swing.JSpinner();
-        btnEstablecer = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        chkAlActiva = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Alarma");
@@ -62,17 +61,10 @@ public class test extends javax.swing.JFrame {
 
         spnMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
-        btnEstablecer.setText("Establecer");
-        btnEstablecer.addActionListener(new java.awt.event.ActionListener() {
+        chkAlActiva.setText("¿Alarma activada?");
+        chkAlActiva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEstablecerActionPerformed(evt);
-            }
-        });
-
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                chkAlActivaActionPerformed(evt);
             }
         });
 
@@ -90,18 +82,16 @@ public class test extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nomAlarma))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEstablecer)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chkAlActiva))
                         .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -110,6 +100,9 @@ public class test extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(reloj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -120,31 +113,37 @@ public class test extends javax.swing.JFrame {
                             .addComponent(spnHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(spnMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEliminar)
-                            .addComponent(btnEstablecer)))
-                    .addComponent(reloj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addComponent(chkAlActiva)
+                        .addGap(17, 17, 17))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEstablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstablecerActionPerformed
-        int hora = (int) spnHora.getValue();
-        int minuto = (int) spnMinuto.getValue();
-        reloj.setAlarma(new Alarma(hora, minuto));
-        reloj.setTextoAlarma(nomAlarma.getText());
-    }//GEN-LAST:event_btnEstablecerActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        reloj.setAlarma(null);
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
     private void relojCapturarAlarma(com.samuel_xoquin.reloj_di03.AlarmaEvent evt) {//GEN-FIRST:event_relojCapturarAlarma
         JOptionPane.showMessageDialog(null, reloj.getTextoAlarma(), "Alerta alarma", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_relojCapturarAlarma
+
+    private void chkAlActivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAlActivaActionPerformed
+        if (chkAlActiva.isSelected()) {
+            int hora = (int) spnHora.getValue();
+            int minuto = (int) spnMinuto.getValue();
+            reloj.setAlarma(new Alarma(hora, minuto));
+            reloj.setTextoAlarma(nomAlarma.getText());
+            
+            spnHora.setEnabled(false);
+            spnMinuto.setEnabled(false);
+            nomAlarma.setEnabled(false);
+        }
+        else{
+            reloj.setAlarma(null);
+            
+            spnHora.setEnabled(true);
+            spnMinuto.setEnabled(true);
+            nomAlarma.setEnabled(true);
+        }
+    }//GEN-LAST:event_chkAlActivaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,8 +181,7 @@ public class test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEstablecer;
+    private javax.swing.JCheckBox chkAlActiva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
