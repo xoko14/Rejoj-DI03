@@ -117,7 +117,7 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
     private String getStringHora(){
         int tHora = hora;
         if(hora>12 && formato == FORMATO_12) tHora=hora-12;
-        return tHora+":"+minuto;
+        return String.format("%02d:%02d", tHora, minuto);
     }
     
     public interface AlarmaListener extends EventListener{
