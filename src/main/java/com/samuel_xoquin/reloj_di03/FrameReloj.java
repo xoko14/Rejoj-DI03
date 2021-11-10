@@ -43,7 +43,6 @@ public class FrameReloj extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        reloj = new com.samuel_xoquin.reloj_di03.bean.RelojBean();
         jLabel1 = new javax.swing.JLabel();
         nomAlarma = new javax.swing.JTextField();
         spnHora = new javax.swing.JSpinner();
@@ -51,12 +50,10 @@ public class FrameReloj extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         spnMinuto = new javax.swing.JSpinner();
         chkAlActiva = new javax.swing.JCheckBox();
+        reloj = new com.samuel_xoquin.reloj_di03.bean.RelojBean();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Alarma");
-
-        reloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        reloj.setTextoAlarma("¡Sonó la alarma!");
 
         jLabel1.setText("Nombre alarma");
 
@@ -75,14 +72,21 @@ public class FrameReloj extends javax.swing.JFrame {
             }
         });
 
+        reloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        reloj.addAlarmaListener(new com.samuel_xoquin.reloj_di03.bean.RelojBean.AlarmaListener() {
+            public void capturarAlarma(com.samuel_xoquin.reloj_di03.bean.AlarmaEvent evt) {
+                relojCapturarAlarma(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(reloj, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(reloj, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -107,10 +111,6 @@ public class FrameReloj extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(reloj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -124,6 +124,10 @@ public class FrameReloj extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(chkAlActiva)
                 .addGap(19, 19, 19))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reloj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
