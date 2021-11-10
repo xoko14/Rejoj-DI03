@@ -1,4 +1,4 @@
-package com.samuel_xoquin.reloj_di03;
+package com.samuel_xoquin.reloj_di03.bean;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +26,11 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
         return formato;
     }
 
+    /**
+     * Establece el formato de la hora (24 o 12h) y actualiza el texto
+     * del JLabel para que el cambio de formato tome efecto para el ususario.
+     * @param formato 
+     */
     public void setFormato(boolean formato) {
         this.formato = formato;
         pintar();
@@ -67,6 +72,10 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
         return alarma;
     }
 
+    /**
+     * Cambia el valor de la alarma y actualiza la flag hayAlarma consecuentemente.
+     * @param alarma 
+     */
     public void setAlarma(Alarma alarma) {
         this.alarma = alarma;
         if(alarma == null){
@@ -91,12 +100,24 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
     private Timer horaFinder;
     private boolean sonoAlarma = false;
 
+    /**
+     * Constructor por defecto. Pone el formato de 24h. Instancia e inicia
+     * el temporizador que actualiza la hora.
+     */
     public RelojBean() {
         formato = FORMATO_24;
+        
+        //Puesto cada 100ms para minimizar el desfase con la hora real que se podría dar.
         horaFinder = new Timer(100, this);
         horaFinder.start();
     }
     
+    /**
+     * Obtiene la hora y minuto actuales. Actualiza el texto del JLabel.
+     * Comprueba si la hora actual coincide con la de la alarma programada (si 
+     * es que está activada), en cuyo caso lanza el evento de alarma.
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e){
         hora = LocalTime.now().getHour();
@@ -114,6 +135,11 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
         }
     }
     
+    /**
+     * Formatea la hora actual de acuerdo con el modo de formato
+     * definido (24 o 12h).
+     * @return String con la hora actual formateada
+     */
     private String getStringHora(){
         int tHora = hora;
         if(hora>12 && formato == FORMATO_12) tHora=hora-12;
@@ -132,6 +158,9 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
         this.alarmaListener=null;
     }
     
+    /**
+     * Pone el texto del JLabel a la hora actual con formato.
+     */
     public void pintar(){
         setText(getStringHora());
     }

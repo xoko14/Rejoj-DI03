@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.samuel_xoquin.reloj_di03;
+package com.samuel_xoquin.reloj_di03.bean;
 
 import java.util.EventObject;
 
