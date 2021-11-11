@@ -17,6 +17,7 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
     private boolean hayAlarma;
     private int hora;
     private int minuto;
+    private int segundo;
     private String mensaje;
     private Alarma alarma;
     private String textoAlarma;
@@ -58,6 +59,14 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
 
     public void setMinuto(int minuto) {
         this.minuto = minuto;
+    }
+
+    public int getSegundo() {
+        return segundo;
+    }
+
+    public void setSegundo(int segundo) {
+        this.segundo = segundo;
     }
 
     public String getMensaje() {
@@ -122,6 +131,7 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
     public void actionPerformed(ActionEvent e){
         hora = LocalTime.now().getHour();
         minuto = LocalTime.now().getMinute();
+        segundo = LocalTime.now().getSecond();
         pintar();
         
         if(hayAlarma && alarma.getHora()==hora && alarma.getMinuto()==minuto){
@@ -143,7 +153,7 @@ public class RelojBean extends JLabel implements Serializable, ActionListener {
     private String getStringHora(){
         int tHora = hora;
         if(hora>12 && formato == FORMATO_12) tHora=hora-12;
-        return String.format("%02d:%02d", tHora, minuto);
+        return String.format("%02d:%02d:%02d", tHora, minuto, segundo);
     }
     
     public interface AlarmaListener extends EventListener{
