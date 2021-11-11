@@ -1,6 +1,6 @@
 package com.samuel_xoquin.reloj_di03;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UIManager;
 
 /**
@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {    
         //establecer tema
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ex) {
             System.err.println("Error al inicializar el tema");
         }
